@@ -52,3 +52,4 @@ Bu checkpoint 10 səhifənin hamısını əhatə edir. Əlavə cilalama üçün:
 - Portfolio kartlarına real şəkillər (hazırda yalnız mətn strukturu var)
 - `next/image` ilə optimallaşdırılmış şəkil komponentləri (real vizual aktivlər əlavə olunanda)
 - E2E test (Playwright) — istəyə bağlı
+# mizantech.ai
