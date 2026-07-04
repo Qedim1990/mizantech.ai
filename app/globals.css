@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  ŞRİFT QEYDİ (vacib):
+  Manrope Google Fonts vasitəsilə next/font/google ilə yüklənir (bax app/layout.tsx).
+  Bir çox məşhur veb şrifti (məs. Open Sans) Azərbaycan "ə" (schwa, U+0259)
+  hərfini DƏSTƏKLƏMİR. Bunun qarşısını almaq üçün aşağıdakı fallback zənciri
+  qəsdən "Noto Sans" və sistem şriftlərini ehtiva edir — brauzer Manrope-də
+  olmayan simvolu avtomatik fallback-dən glyph-by-glyph çəkəcək.
+  DEPLOY ÖNCƏSİ: real Azərbaycan mətni ilə bütün "ə/ş/ç/ğ/ö/ü/ı" hərflərinin
+  hər üç font-weight-də düzgün render olunduğunu vizual yoxlayın.
+*/
+
+@layer base {
+  :root {
+    --font-manrope: "Manrope", "Noto Sans", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "Noto Sans Mono", ui-monospace, monospace;
+  }
+
+  * {
+    @apply border-neutral-200;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-navy-900 antialiased;
+    font-feature-settings: "cv01", "ss01";
+  }
+
+  /* Görünən, brend-uyğun focus ring — klaviatura naviqasiyası üçün.
+     navy-900 açıq fonlarda (saytın böyük əksəriyyəti) 13:1+ kontrastdadır.
+     Tünd fonlu bölmələr (.on-dark) üçün aşağıda gold-300-ə keçir. */
+  :focus-visible {
+    outline: 2px solid theme("colors.navy.900");
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: theme("colors.gold.300");
+  }
+
+  ::selection {
+    background-color: theme("colors.gold.200");
+    color: theme("colors.navy.900");
+  }
+
+  /* prefers-reduced-motion tam hörmət olunur */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-shimmer {
+    background: linear-gradient(
+      110deg,
+      theme("colors.neutral.100") 8%,
+      theme("colors.neutral.50") 18%,
+      theme("colors.neutral.100") 33%
+    );
+    background-size: 200% 100%;
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+}
