@@ -16,6 +16,13 @@ interface CardProps extends HTMLMotionProps<"div"> {
   children: ReactNode;
   /** Turns off the 3D tilt (e.g. for dense grids where it feels excessive). */
   tilt?: boolean;
+  /**
+   * Adds a slow animated gold light travelling along the border.
+   * Opt-in and off by default — reserve for one designated grid (e.g.
+   * the services grid), not every Card instance site-wide, per the
+   * "restraint + one bold moment" brand principle.
+   */
+  pulseBorder?: boolean;
 }
 
 const MAX_TILT_DEG = 6;
@@ -27,7 +34,7 @@ const MAX_TILT_DEG = 6;
  * element from the brief — kept restrained (6° max) so it reads as
  * premium physicality, not a gimmick. Disabled under reduced-motion.
  */
-export function Card({ children, tilt = true, className, ...props }: CardProps) {
+export function Card({ children, tilt = true, pulseBorder = false, className, ...props }: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const enableTilt = tilt && !prefersReducedMotion;
@@ -70,6 +77,7 @@ export function Card({ children, tilt = true, className, ...props }: CardProps) 
       className={cn(
         "group relative overflow-hidden rounded-lg border border-neutral-200",
         "bg-white p-6 shadow-card transition-shadow duration-300 hover:shadow-card-hover",
+        pulseBorder && "border-pulse",
         className
       )}
       {...props}
