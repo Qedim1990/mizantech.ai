@@ -104,9 +104,14 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "grid-pulse": {
+          "0%": { backgroundPosition: "0% 50%" },
+          "100%": { backgroundPosition: "250% 50%" },
+        },
       },
       animation: {
         shimmer: "shimmer 1.8s ease-in-out infinite",
+        "grid-pulse": "grid-pulse 5s linear infinite",
       },
     },
   },
